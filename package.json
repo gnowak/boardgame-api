@@ -1,0 +1,26 @@
+{
+  "name": "boardgame-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnowak/boardgame-api.git"
+  },
+  "author": "Geoff Nowak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gnowak/boardgame-api/issues"
+  },
+  "homepage": "https://github.com/gnowak/boardgame-api#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.2",
+    "nodemon": "^1.18.0"
+  }
+}
