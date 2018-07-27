@@ -15,22 +15,23 @@ var bggApiUrl = 'https://www.boardgamegeek.com/xmlapi2/';
 
 router.get('/:bgg_user_name', function(req, res){
 
-  var collection = new GameCollection();
-
   var regex = new RegExp(req.params.game_name, 'i');
   var textJunk = '';
-
-  GameCollection.find({username: regex}, function(err, collection) {
-
+  
+  GameCollection.find({username: regex}, function(err, collection) {  
     if (err)
-      res.send(err);
+    res.send(err);
     if (collection.length)
-      res.status(200).send(collection);
+    res.status(200).send(collection);
     else {
+      var collection = new GameCollection();
+
       axios.get(bggApiUrl + 'collections/?username=' + req.params.bgg_user_name)
       .then(function(response) {
-        
         parseString(response.data, function(err, result){
+         
+          // const games = result.items.map(x => {});
+
           console.log(result);
           textJunk = result;
         });
@@ -40,20 +41,7 @@ router.get('/:bgg_user_name', function(req, res){
         res.json({message: "Check username!"})
       });
     }
-});
-    
-  // var regex = new RegExp(req.params.bgg_user_name, 'i');
-  
-  // GameCollection.find({
-  //   name_lower: regex
-  // }, function(err, gameCollection){
-  //   if(err)
-  //     res.status(500).send(err);
-  //   if(game.length)
-  //     res.status(200).send(gameCollection);
-  //   else {
-  //   };
-  // });
+  });
 });
 
 module.exports = router;
