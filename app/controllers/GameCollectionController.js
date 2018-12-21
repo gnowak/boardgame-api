@@ -16,7 +16,6 @@ var bggApiUrl = 'https://www.boardgamegeek.com/xmlapi2/';
 router.get('/:bgg_user_name', function(req, res){
 
   var regex = new RegExp(req.params.game_name, 'i');
-  var textJunk = '';
   
   GameCollection.find({username: regex}, function(err, collection) {  
     if (err)
@@ -25,17 +24,13 @@ router.get('/:bgg_user_name', function(req, res){
     res.status(200).send(collection);
     else {
       var collection = new GameCollection();
-
       axios.get(bggApiUrl + 'collections/?username=' + req.params.bgg_user_name)
       .then(function(response) {
         parseString(response.data, function(err, result){
-         
           // const games = result.items.map(x => {});
-
-          console.log(result);
-          textJunk = result;
+          console.log(result.items.item);
         });
-        res.status(200).send(textJunk); 
+        res.status(200).send(result.items); 
       })
       .catch(function (error) {
         res.json({message: "Check username!"})
