@@ -3,6 +3,8 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var axios = require('axios');
+var parseString = require('xml2js').parseString;
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
